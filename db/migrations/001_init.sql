@@ -1,7 +1,14 @@
 -- Ruang Sela Foto · skema awal
 -- Schema privat "foto": tidak diekspos Data API Supabase, hanya diakses fungsi server.
 
-create schema if not exists foto;
+-- Di Supabase, schema sudah dibuat dan dimiliki role aplikasi; buat hanya bila belum ada.
+do $$
+begin
+	if not exists (select 1 from pg_namespace where nspname = 'foto') then
+		create schema foto;
+	end if;
+end
+$$;
 
 -- Daftar paket tepercaya. Harga dan detail dibaca dari sini, bukan dari browser.
 create table foto.packages (
