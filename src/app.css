@@ -5,19 +5,23 @@
 @import '@fontsource-variable/karla';
 
 :root {
-	--ivory: #f5f0e6;
-	--ivory-deep: #ebe3d4;
-	--charcoal: #2a2826;
-	--charcoal-soft: #4a4642;
-	--muted: #6a645c;
-	--rule: #cfc5b4;
+	/* Palet mewah: gading hangat, arang, dan perunggu. */
+	--ivory: #f4eee3;
+	--ivory-deep: #e9e0cf;
+	--charcoal: #1c1a18;
+	--charcoal-soft: #45403a;
+	--muted: #6a6157;
+	--rule: #cbbfa9;
+	--bronze: #9a7a52;
+	--bronze-soft: #cdb48c;
 	--alert: #9c3a2c;
 	--focus: #1f5fbf;
 
 	--serif: 'Cormorant Garamond', Georgia, serif;
 	--sans: 'Karla Variable', system-ui, sans-serif;
 
-	--gutter: clamp(1.1rem, 5vw, 3rem);
+	--gutter: clamp(1rem, 3.2vw, 3rem);
+	--header-h: 3.75rem;
 	--text: 36rem;
 	color-scheme: light;
 }

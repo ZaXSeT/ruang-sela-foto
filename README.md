@@ -4,7 +4,7 @@ Demo portofolio untuk fotografer independen. Calon klien membaca tiga cerita fot
 
 Nama studio, nama orang dalam cerita, dan semua pertanyaan di proyek ini fiktif. Foto berasal dari Pexels (lihat [Aset dan lisensi](#aset-dan-lisensi)).
 
-**Status:** selesai dan teruji lokal (24 Nov 2026). Belum di-deploy. Langkahnya ada di bagian [Deploy ke Vercel](#deploy-ke-vercel).
+**Status:** live di Production → **https://ruang-sela-foto.vercel.app** (diverifikasi 26 Nov 2026). Repo: [github.com/ZaXSeT/ruang-sela-foto](https://github.com/ZaXSeT/ruang-sela-foto).
 
 | Cerita di HP | Konfirmasi di HP |
 |---|---|
@@ -105,7 +105,32 @@ Sabtu, 12 Desember 2026  ·  Keluarga  ·  Menunggu balasan
 | Restart | Postgres dihentikan dan dinyalakan ulang | 4 pertanyaan tetap terbaca |
 | Layout | 390 px dan 1440 px | Tanpa scroll horizontal; urutan foto bermakna di HP tanpa hover maupun animasi |
 
-Environment: Windows 11, Node 24.11.1, Postgres tertanam lokal. Vercel Preview dan Production belum diuji.
+Environment: Windows 11, Node 24.11.1, Postgres tertanam lokal. Vercel Preview dan Production: lihat bagian Deployment yang berjalan.
+
+## Deployment yang berjalan
+
+| | Nilai |
+|---|---|
+| URL Production | https://ruang-sela-foto.vercel.app |
+| Repo GitHub | [ZaXSeT/ruang-sela-foto](https://github.com/ZaXSeT/ruang-sela-foto) (folder ini adalah root repo; push ke `main` = deploy Production) |
+| Proyek Vercel | `ruang-sela-foto` (Hobby, framework SvelteKit, region fungsi `sin1`) |
+| Database Production | Supabase `porto-threads-prod` (Singapura), schema `foto`, role `foto_app` |
+| Database Preview | Supabase `porto-threads-preview`, schema dan role yang sama |
+| Env | `DATABASE_URL` (Sensitive) berbeda untuk Production dan Preview, lewat transaction pooler `aws-1-ap-southeast-1.pooler.supabase.com:6543` |
+
+Role `foto_app` hanya memiliki schema `foto`. Akses ke schema aplikasi lain dan `CREATE` pada database ditolak (diuji). Preview deployment dilindungi Vercel Authentication; Production publik.
+
+### Hasil uji di Vercel (26 Nov 2026)
+
+| Lingkungan | Hasil |
+|---|---|
+| Preview | F1 pertanyaan Pasangan 19 Des → "menunggu_balasan"; F3 paket nonaktif + tanggal lampau + email salah → 400 dengan error per field; F4 halaman dan `__data.json` publik tanpa data pengirim; `pertanyaan` di DB preview 1, DB prod 0 |
+| Production | F1 tersimpan "Menunggu balasan"; F3 → 400; F4 tanpa data pengirim; foto cerita dan halaman 200 |
+| Redeploy Production | Transaksi sintetis sebelum redeploy tetap terbaca lewat CLI pemilik setelah redeploy (lihat `npm run pertanyaan` dengan `DATABASE_URL` Production) |
+
+## Desain
+
+Navbar penuh dari tepi ke tepi dan menempel di atas; konten dan foto mengisi lebar layar dengan gutter `clamp(1rem, 3.2vw, 3rem)`. Palet: arang `#1c1a18`, gading hangat `#f4eee3`, perunggu `#9a7a52`. Dicek di 360, 390, 768, 1440, dan 1920 px tanpa scroll horizontal.
 
 ## Deploy ke Vercel
 

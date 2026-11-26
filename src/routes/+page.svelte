@@ -17,7 +17,7 @@
 
 <section class="hero" aria-labelledby="judul">
 	<div class="hero-photo">
-		<Figure photo={HERO} ratio="4 / 5" sizes="(min-width: 64rem) 40vw, 100vw" eager />
+		<Figure photo={HERO} ratio="4 / 5" sizes="(min-width: 64rem) 50vw, 100vw" eager />
 	</div>
 	<div class="hero-text">
 		<h1 id="judul">Ruang Sela Foto</h1>
@@ -58,19 +58,39 @@
 </section>
 
 <style>
+	/* Hero: foto menempel ke tepi layar (kanan di desktop, kiri-kanan di HP) */
 	.hero {
 		display: grid;
-		gap: 1.75rem;
-		padding-inline: var(--gutter);
+		background: var(--charcoal);
+		color: var(--ivory);
+	}
+	.hero-photo :global(img) {
+		height: 100%;
 	}
 	.hero-text {
 		display: grid;
-		gap: 1rem;
+		gap: 1.1rem;
 		justify-items: start;
 		align-content: end;
+		padding: 2.5rem var(--gutter) 3rem;
+	}
+	.hero .body {
+		color: #d5ccbe;
+	}
+	.hero .lede {
+		color: var(--bronze-soft);
+	}
+	.hero .btn {
+		background: var(--ivory);
+		color: var(--charcoal);
+		border-color: var(--ivory);
+	}
+	.hero .btn:hover {
+		background: var(--bronze-soft);
+		border-color: var(--bronze-soft);
 	}
 	h1 {
-		font-size: clamp(3rem, 13vw, 6.5rem);
+		font-size: clamp(3.4rem, 14vw, 8.5rem);
 		font-weight: 400;
 		letter-spacing: -0.015em;
 		line-height: 0.95;
@@ -90,7 +110,8 @@
 	}
 	.index > h2,
 	.pkg h2 {
-		font-size: clamp(2rem, 6vw, 3rem);
+		font-size: clamp(2.4rem, 6.5vw, 5rem);
+		font-weight: 400;
 		margin-bottom: 2rem;
 	}
 	ol {
@@ -117,7 +138,11 @@
 		color: var(--muted);
 	}
 	h3 {
-		font-size: clamp(1.7rem, 5vw, 2.4rem);
+		font-size: clamp(1.9rem, 4.5vw, 3.4rem);
+		font-weight: 400;
+	}
+	.meta {
+		color: var(--bronze);
 	}
 	h3 a {
 		text-decoration: none;
@@ -133,7 +158,7 @@
 	.pkg {
 		margin: 5rem var(--gutter) 0;
 		padding-top: 2.5rem;
-		border-top: 1px solid var(--rule);
+		border-top: 1px solid var(--bronze);
 		display: grid;
 		gap: 1rem;
 		justify-items: start;
@@ -148,15 +173,19 @@
 
 	@media (min-width: 64rem) {
 		.hero {
-			grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-			gap: 4rem;
-			align-items: end;
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+			min-height: calc(100svh - var(--header-h));
 		}
 		.hero-photo {
 			order: 2;
 		}
+		.hero-photo :global(img) {
+			aspect-ratio: auto !important;
+			height: calc(100svh - var(--header-h));
+			min-height: 36rem;
+		}
 		.hero-text {
-			padding-bottom: 2rem;
+			padding-block: 3rem 4rem;
 		}
 		li {
 			grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);

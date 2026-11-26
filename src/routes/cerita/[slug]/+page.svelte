@@ -91,8 +91,14 @@
 	.block {
 		margin-block: 3rem;
 	}
-	.wide {
-		max-width: 72rem;
+	/* Di HP, foto lebar dan pasangan foto menempel ke tepi layar; caption tetap berjarak. */
+	.wide,
+	.pair {
+		margin-inline: calc(var(--gutter) * -1);
+	}
+	.wide :global(figcaption),
+	.pair-caption {
+		padding-inline: var(--gutter);
 	}
 	.tall {
 		max-width: 32rem;
@@ -117,7 +123,7 @@
 		font-size: clamp(1.35rem, 4vw, 1.75rem);
 		color: var(--charcoal);
 		padding-left: 1.25rem;
-		border-left: 1px solid var(--charcoal);
+		border-left: 2px solid var(--bronze);
 	}
 	.closing {
 		max-width: var(--text);
@@ -126,8 +132,8 @@
 	}
 	.offer {
 		max-width: 30rem;
-		border-top: 1px solid var(--charcoal);
-		border-bottom: 1px solid var(--charcoal);
+		border-top: 1px solid var(--bronze);
+		border-bottom: 1px solid var(--bronze);
 		padding-block: 1.5rem;
 		display: grid;
 		gap: 0.75rem;
@@ -165,6 +171,14 @@
 	}
 
 	@media (min-width: 48rem) {
+		.wide,
+		.pair {
+			margin-inline: 0;
+		}
+		.wide :global(figcaption),
+		.pair-caption {
+			padding-inline: 0;
+		}
 		.two {
 			grid-template-columns: 1fr 1fr;
 			gap: 1.5rem;
