@@ -24,3 +24,5 @@ vite.config.ts.timestamp-*
 
 # Postgres lokal tertanam
 .data/
+.vercel
+.env*
